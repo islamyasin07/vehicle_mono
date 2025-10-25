@@ -37,6 +37,6 @@ void main() {
     final e2 = e.copyWith(capacity: 2000, cylinders: 4);
     expect(e2.capacity, 2000);
     expect(e2.cylinders, 4);
-    expect(e.capacity, 0); 
+    expect(e.capacity, 0);
   });
 }
