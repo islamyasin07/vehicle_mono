@@ -1,0 +1,16 @@
+include: package:lints/recommended.yaml
+linter:
+  rules:
+    - always_declare_return_types
+    - prefer_final_fields
+    - prefer_final_locals
+    - require_trailing_commas
+    - avoid_print
+    - unnecessary_this
+    - prefer_const_constructors
+    - prefer_const_literals_to_create_immutables
+    - avoid_unused_constructor_parameters
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - no_leading_underscores_for_local_identifiers
+    - prefer_single_quotes    
