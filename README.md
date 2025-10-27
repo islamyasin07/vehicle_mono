@@ -6,7 +6,6 @@ A sophisticated Flutter application for managing vehicle fleets with robust sear
 
 The Vehicle Management System (VMS) provides a modern, material-design interface for tracking and managing various vehicle types including cars, motorcycles, and commercial trucks. The application features real-time state management, persistent storage, and an intuitive search functionality.
 
-![Vehicle Management System](docs/assets/vm_logo.png)
 
 ### Vehicle Management Interface
 ![Cars Management](docs/screenshots/homepage-cars.png)
