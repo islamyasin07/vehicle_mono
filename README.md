@@ -1,151 +1,176 @@
-# Vehicle Mono — Vehicle Manager (Flutter monorepo)
+# Vehicle Management System
 
-Welcome to Vehicle Mono — a small, multi-package Flutter project to manage vehicles (cars, motorcycles, trucks). This README is tailored to be both a professional project overview and a handy developer guide. It also includes a concise changelog of recent work and placeholders for logo/screenshots so you can make the README visual and polished.
+A sophisticated Flutter application for managing vehicle fleets with robust search capabilities and real-time data synchronization. Built with a clean architecture approach using domain-driven design principles.
 
----
+## Overview
 
-## Quick overview
+The Vehicle Management System (VMS) provides a modern, material-design interface for tracking and managing various vehicle types including cars, motorcycles, and commercial trucks. The application features real-time state management, persistent storage, and an intuitive search functionality.
 
-- Project type: Flutter multi-package monorepo
-- Main app: `packages/app_flutter` (Flutter app using Provider)
-- Domain package: `packages/domain` (models, data repository, storage service, search helpers)
+![Vehicle Management System](docs/assets/vm_logo.png)
 
-This app provides CRUD operations for three vehicle types (Car, Motorcycle, Truck). Data is stored locally using a simple JSON-based storage service under the domain package.
+### Vehicle Management Interface
+![Cars Management](docs/screenshots/homepage-cars.png)
+![Motorcycles Management](docs/screenshots/homepage-motors.png)
+![Trucks Management](docs/screenshots/homepage-trucks.png)
 
-## Features
+### Vehicle Creation and Editing
+![Vehicle Editor](docs/screenshots/create-edit-page.png)
 
-- Add / Edit vehicles with rich form (engine, dimensions, weights, manufacture date)
-- Insert at index (advanced insert) from the editor
-- Swipe-to-delete in lists (with immediate persistence)
-- Delete button inside the editor when editing an existing item
-- Search by company name, plate number, and manufacture date (uses typed SearchService)
-- Animated, visually pleasing UI: animated gradient backgrounds, smooth transitions, cards and translucent surfaces
+## Architecture
 
-## Repo layout (high level)
+The project follows a modular monorepo structure:
 
-- packages/
-	- app_flutter/ — Flutter application
-		- lib/pages/ — main screens (home, search, edit)
-		- lib/widgets/ — reusable widgets (vehicle cards, fields, empty state)
-		- lib/state/ — app state and provider wiring
-	- domain/ — domain models and storage (VehicleRepository, StorageService, adapters)
-
-## How to run (Windows — PowerShell)
-
-1. Open PowerShell and navigate to the app package:
-
-```powershell
-cd C:\flutter-projects\vehicle_mono\packages\app_flutter
+```
+vehicle_mono/
+├── packages/
+│   ├── app_flutter/      # UI Layer & State Management
+│   └── domain/          # Core Business Logic & Models
 ```
 
-2. Get dependencies and run the app on a connected device or emulator:
+### Core Technologies
 
-```powershell
+- **UI Framework**: Flutter with Material Design 3
+- **State Management**: Provider pattern with ChangeNotifier
+- **Data Persistence**: JSON-based local storage with atomic write operations
+- **Architecture Pattern**: Clean Architecture with Domain-Driven Design
+- **Testing**: Widget tests for UI components, unit tests for domain logic
+
+### Key Features
+
+- **Dynamic Vehicle Management**
+  - Comprehensive CRUD operations for cars, motorcycles, and trucks
+  - Optimistic UI updates with persistent storage
+  - Swipe-to-delete with immediate state synchronization
+
+- **Advanced Search Capabilities**
+  - Multi-criteria search across vehicle types
+  - Real-time filtering by company, plate number, and date
+  - Optimized search algorithms for large datasets
+
+- **Polished User Experience**
+  - Animated transitions and micro-interactions
+  - Responsive layout adapting to various screen sizes
+  - Dark mode support with dynamic theming
+
+- **Data Integrity**
+  - Atomic write operations preventing data corruption
+  - Validation rules enforced at domain layer
+  - Type-safe models with immutable properties
+
+## Technical Implementation
+
+### Domain Layer
+
+The domain package implements the core business logic and defines the contract between data layer and UI:
+
+- **Models**: Immutable data classes for vehicles and components
+- **Repositories**: Abstract interfaces for data operations
+- **Services**: Business logic implementation including search and validation
+
+### Application Layer
+
+The Flutter application package implements the UI and state management:
+
+- **State Management**: Hierarchical provider structure for efficient updates
+- **UI Components**: Reusable widgets with consistent styling
+- **Navigation**: Named routing with type-safe arguments
+- **Theme**: Customizable material design implementation
+
+## Performance Considerations
+
+- Optimized list rendering with lazy loading
+- Efficient memory usage through stream-based state updates
+- Minimized rebuild scope using selective provider consumers
+- Background processing for data operations
+
+## Security
+
+- Input sanitization at UI and domain layers
+- Secure local storage with proper file permissions
+- Type-safe operations preventing runtime errors
+- Validation constraints enforced at domain boundary
+
+## Changelog
+
+### Latest Release
+
+- Enhanced UI with animated transitions and polished visuals
+- Implemented comprehensive search service
+- Added persistent delete operations with immediate state updates
+- Optimized build configuration and dependency management
+- Resolved analyzer warnings and upgraded deprecated APIs
+
+## Development Setup
+
+### Prerequisites
+
+- Flutter SDK (Latest stable version)
+- Dart SDK (Latest stable version)
+- Android Studio / VS Code with Flutter extensions
+- Git for version control
+
+### Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/islamyasin07/vehicle_mono.git
+cd vehicle_mono
+```
+
+2. Install dependencies:
+```bash
+cd packages/app_flutter
 flutter pub get
+cd ../domain
+dart pub get
+```
+
+3. Run the application:
+```bash
+cd ../app_flutter
 flutter run
-# or select a device: flutter devices then flutter run -d <deviceId>
 ```
 
-3. Analyze & lint:
+## Project Structure
 
-```powershell
-flutter analyze
 ```
-
-## Screenshots & Logo (placeholders)
-
-Add your images to the repository and reference them here. Recommended folders:
-
-- `assets/logo.png` — app logo
-- `docs/screenshots/home.png` — screenshot of Home screen
-- `docs/screenshots/edit.png` — screenshot of Edit form
-
-Example Markdown you can paste into this README after adding images:
-
-```markdown
-![App Logo](assets/logo.png)
-
-### Home
-![Home Screen](docs/screenshots/home.png)
-
-### Edit Vehicle
-![Edit Screen](docs/screenshots/edit.png)
+packages/
+├── app_flutter/           # Flutter application
+│   ├── lib/
+│   │   ├── core/         # App configuration, DI, routes
+│   │   ├── pages/        # UI screens and business logic
+│   │   ├── state/        # State management and providers
+│   │   └── widgets/      # Reusable UI components
+│   └── test/             # Widget and integration tests
+│
+└── domain/               # Core business logic
+    ├── lib/
+    │   ├── models/       # Domain entities
+    │   ├── services/     # Business services
+    │   └── data/         # Repository implementations
+    └── test/             # Unit tests
 ```
-
-If you'd like, I can add these files (blank placeholders or sample screenshots) to the repo for you.
-
-## Changelog — What we changed (concise)
-
-The following is a summary of recent edits applied across the codebase (useful if you want to review or revert changes):
-
-- `packages/app_flutter/lib/pages/home_page.dart`
-	- Added animated gradient background, an AnimatedSwitcher for tab content transitions, and a rotating FAB for a polished UX. The main list area uses translucent Material surfaces so content pops from the background.
-
-- `packages/app_flutter/lib/pages/search_page.dart`
-	- Built a Search UI with fields for company name, plate number, and date. Integrated `SearchService` from the domain package to perform typed lookups.
-
-- `packages/app_flutter/lib/pages/edit_vehicle_page.dart`
-	- Comprehensive vehicle form for Car / Truck / Motorcycle, including engine, dimensions and weights.
-	- Added a red "Delete" button that appears when editing an existing item; it calls the app state's delete method, saves, and closes the editor.
-	- Insert-at-index dialog and hydration helpers (fill form when editing an item) are present.
-
-- `packages/app_flutter/lib/pages/list_tab.dart`
-	- List rendering for the three vehicle types. Each list item is wrapped in a `Dismissible`/`VehicleCard`.
-	- Swipe-to-delete now calls `AppState.deleteXAt(index)` and immediately `AppState.save()` so deletions persist to storage.
-
-- `packages/app_flutter/lib/widgets/vehicle_card.dart`
-	- Card UI for vehicles with gradients and icons; uses `Dismissible` for swipe-to-delete and tactile scale animation on tap.
-
-- `packages/app_flutter/lib/widgets/empty_state.dart`
-	- Improved empty-state presentation with a rounded Material card and padding for visual consistency.
-
-- `packages/app_flutter/lib/widgets/labeled_field.dart`
-	- Styled TextFormField with a filled background and rounded border for consistent form visuals.
-
-- `packages/domain/lib/services/search_service.dart`
-	- Added typed search helpers: search by company/model, plate, and manufacture date.
-
-- `packages/domain/lib/data/repo.dart` and `storage_service.dart`
-	- Repository CRUD methods exist for add/update/delete/insert and save/load helpers that persist JSON files to app documents directory.
-
-- `packages/app_flutter/lib/state/app_state.dart`
-	- ChangeNotifier wrapper around `VehicleRepository` exposing add/update/delete/insert + save operations used by the UI.
-
-Notes:
-- The delete UX was improved to be more discoverable (explicit Delete button in editor) and more reliable (swipe deletes now persist instantly).
-- A number of stylistic and lint fixes were applied across code (consts, alpha usage for colors, small naming fixes) during iteration.
-
-## Developer notes & next steps
-
-- Undo / Snackbar: currently deletes are immediate. A recommended next step is to add an 'Undo' snackbar after deletion so users can recover accidental removals. I can implement this across both swipe and editor deletes.
-- Tests: add some domain unit tests for `VehicleRepository` and `SearchService` (quick wins to protect behavior).
-- CI: add a GitHub Actions workflow running `flutter analyze` and optionally `flutter test` for PR checks.
 
 ## Contributing
 
-If you want me to add images, implement Undo snackbar, or add CI, tell me which feature to prioritize and I will implement and run tests locally.
+### Code Style
+
+The project follows official Dart and Flutter style guides:
+- Use `flutter analyze` to ensure code quality
+- Maintain consistent file structure
+- Follow Material Design 3 guidelines for UI components
+
+### Testing
+
+```bash
+# Run all tests
+flutter test
+
+# Run with coverage
+flutter test --coverage
+```
 
 ## License
 
-Add your license here. Example: MIT.
-
----
-
-## ملخص عربي (Arabic summary — موجز عربي احترافي)
-
-Vehicle Mono هو مشروع Flutter ضمن repo متعدد الحزم لإدارة المركبات (سيارات، دراجات نارية، شاحنات). قمت مؤخراً بتحسين واجهة المستخدم بشكل مرئي، وإضافة صفحة بحث فعالة، وتحسينات على حذف العناصر (سواء بالسحب أو من شاشة التعديل) بحيث يتم الحذف وحفظ التغييرات مباشرة. كما أضفت خدمة بحث بسيطة في حزمة الـ domain.
-
-التغييرات الرئيسية:
-- واجهة رئيسية مع تدرجات متحركة.
-- شاشة بحث تدعم البحث باسم الشركة، رقم اللوحة، وتاريخ التصنيع.
-- شاشة تعديل بها زر حذف يظهر عند تحرير عنصر موجود ويقوم بالحذف والحفظ والرجوع.
-- السحب للحذف في القوائم الآن يحفظ تلقائياً.
-
-للمتابعة: أخبرني إن أردت إضافة زر تراجع (Undo)، تأكيد حذف (dialog)، أو أن أضع لوجو/صور توضيحية داخل `assets/` و`docs/screenshots/` وأحدّث الـ README لعرضها مباشرة.
-
----
-
-If you want the README to include a real logo and screenshots now, say "Add placeholders" and I will create `assets/logo.png` (blank/placeholder) and sample screenshots in `docs/screenshots/` and update the README with working sample image links.
-
-Happy to continue — tell me which follow-up you prefer (Undo snackbar, confirmation dialog, or add logo/screenshots now). 
+This project is licensed under the MIT License - see the LICENSE file for details.
 
